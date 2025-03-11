@@ -95,8 +95,9 @@
         .menu ul li a {
             color: white;
             text-decoration: none;
-            display: block;
-            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
 
         .close-menu {
@@ -110,11 +111,11 @@
 
         .content {
             padding: 20px;
-            display: none; /* Ẩn tất cả ban đầu */
+            display: none;
         }
 
         #home {
-            display: block; /* Mặc định hiển thị trang chủ */
+            display: block;
         }
 
         h1 {
@@ -124,6 +125,12 @@
         .post-info {
             font-size: 14px;
             color: gray;
+        }
+
+        .post-image {
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -140,10 +147,10 @@
         <div class="menu" id="menu">
             <span class="close-menu" id="closeMenu">✖</span>
             <ul>
-                <li><a href="#" onclick="showPage('home')">Trang chủ</a></li>
-                <li><a href="#" onclick="showPage('hack')">HACK</a></li>
-                <li><a href="#" onclick="showPage('script')">Script Blox Fruits</a></li>
-                <li><a href="#" onclick="showPage('unknown')">CHƯA BIẾT THÊM GÌ</a></li>
+                <li><a onclick="showPage('home')">Trang chủ</a></li>
+                <li><a onclick="showPage('hack')">HACK</a></li>
+                <li><a onclick="showPage('script')">Script Blox Fruits</a></li>
+                <li><a onclick="showPage('unknown')">CHƯA BIẾT THÊM GÌ</a></li>
             </ul>
         </div>
     </div>
@@ -154,6 +161,8 @@
             <li><a href="https://discord.gg/kDRaYFyh" target="_blank" style="color: blue;">Tham gia máy chủ Discord</a></li>
         </ul>
         <p>Các phần hack, script sẽ nằm trong các mục khác, hãy sử dụng menu để truy cập.</p>
+        <p>có hơi ít client do tấn không đưa ấy</p>
+        <p>chưa có script nào cả vì cũng chưa biết nên cho cái nào góp ý qua dis đi</p>
     </div>
 
     <div class="content" id="hack">
@@ -162,56 +171,44 @@
 
         <h2>QUỐC TẾ</h2>
         <ul>
-            <li>
-                <strong>Trigon</strong><br>
-                <a href="https://www.mediafire.com/file/fzg5y2fmnvake2y/Trigon_v2.662.apk/file" target="_blank">Tải xuống</a>
-            </li>
-            <li>
-                <strong>Arceus X Neo</strong><br>
-                <a href="https://www.mediafire.com/file/hpbgfpgbpdf6toj/Arceus_X_NEO_Qu%25E1%25BB%2591c_T%25E1%25BA%25BF_1.5.8.apk/file" target="_blank">Tải xuống</a>
-            </li>
+            <li>Trigon<br><a href="https://www.mediafire.com/file/fzg5y2fmnvake2y/Trigon_v2.662.apk/file" target="_blank">Tải xuống trigon</a></li>
+            <li>Arceus X Neo<br><a href="https://www.mediafire.com/file/hpbgfpgbpdf6toj/Arceus_X_NEO_Qu%25E1%25BB%2591c_T%25E1%25BA%25BF_1.5.8.apk/file" target="_blank">Tải xuống Arceus X Neo</a></li>
+            <li>CODEX<br><a href="https://www.mediafire.com/file/m6yi13urly5t6eg/Blox_Fruit_CodeX_V28.apk/file" target="_blank">Tải xuống CODEX</a></li>
+            <li>DELTA<br><a href="https://www.mediafire.com/file/qi36j2ucck0tw24/Delta_X_V54.apk/file" target="_blank">Tải xuống DELTA</a></li>
+            <li>FLUXUS<br><a href="https://www.mediafire.com/file/kwahjtlfwirji42/Blox_Fruit_Fluxus_V57.apk/file" target="_blank">Tải xuống Fluxus</a></li>
+        </ul>
+
+        <h2>VNG 🇻🇳</h2>
+        <ul>
+            <li>Arceus X Neo VNG<br><a href="https://www.mediafire.com/file/gcw80mokugb2r3q/Arceus_X_VNG_NEO_1.5.4.apk/file" target="_blank">Tải xuống ARCEUS X NEO VNG</a></li>
+            <li>CODEX VNG<br><a href="https://www.mediafire.com/file/xgreqbjplqt2tet/Blox_Fruit_CodeX_VNG_V27.apk/file" target="_blank">Tải xuống CODEX VNG</a></li>
         </ul>
     </div>
 
-    <script defer>
-        document.addEventListener("DOMContentLoaded", function() {
-            const toggleThemeButton = document.getElementById("toggleTheme");
-            const menuButton = document.getElementById("menuButton");
-            const closeMenu = document.getElementById("closeMenu");
-            const menuContainer = document.getElementById("menuContainer");
-            const menu = document.getElementById("menu");
-
-            // Kiểm tra dark mode từ localStorage
-            if (localStorage.getItem("theme") === "dark") {
-                document.body.classList.add("dark-mode");
-                toggleThemeButton.textContent = "🌙";
-            }
-
-            toggleThemeButton.addEventListener("click", () => {
-                document.body.classList.toggle("dark-mode");
-                localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-                toggleThemeButton.textContent = document.body.classList.contains("dark-mode") ? "🌙" : "🌞";
-            });
-
-            menuButton.addEventListener("click", () => {
-                menuContainer.style.display = "flex";
-                setTimeout(() => menu.classList.add("show"), 10);
-            });
-
-            function closeMenuFunc() {
-                menu.classList.remove("show");
-                setTimeout(() => menuContainer.style.display = "none", 300);
-            }
-
-            closeMenu.addEventListener("click", closeMenuFunc);
-            menuContainer.addEventListener("click", (e) => { if (e.target === menuContainer) closeMenuFunc(); });
-
-            // Hàm chuyển trang
-            window.showPage = function(page) {
-                document.querySelectorAll(".content").forEach(el => el.style.display = "none");
-                document.getElementById(page).style.display = "block";
-            };
+    <script>
+        document.getElementById("menuButton").addEventListener("click", () => {
+            document.getElementById("menuContainer").style.display = "flex";
+            setTimeout(() => document.getElementById("menu").classList.add("show"), 10);
         });
+
+        document.getElementById("closeMenu").addEventListener("click", () => {
+            document.getElementById("menu").classList.remove("show");
+            setTimeout(() => document.getElementById("menuContainer").style.display = "none", 300);
+        });
+
+        document.getElementById("toggleTheme").addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        });
+
+        function showPage(page) {
+            document.querySelectorAll(".content").forEach(el => el.style.display = "none");
+            document.getElementById(page).style.display = "block";
+        }
+
+        if (localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark-mode");
+        }
     </script>
 </body>
 </html>
