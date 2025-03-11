@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Tải ROBLOX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        .header {
+            background-color: #222;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #menuButton {
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: gray;
+        }
+
+        #toggleTheme {
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+
+        .menu {
+            width: 250px;
+            height: 100%;
+            background: #333;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+        }
+
+        .menu.show {
+            transform: translateX(0);
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu ul li {
+            padding: 10px;
+            border-bottom: 1px solid gray;
+        }
+
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .close-menu {
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            display: block;
+            text-align: right;
+            padding: 10px;
+        }
+
+        .content {
+            padding: 20px;
+            display: none; /* Ẩn tất cả ban đầu */
+        }
+
+        #home {
+            display: block; /* Mặc định hiển thị trang chủ */
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .post-info {
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <button id="menuButton">☰</button>
+            <span class="breadcrumb">Trang chủ</span>
+        </div>
+        <button id="toggleTheme">🌞</button>
+    </div>
+
+    <div class="menu-container" id="menuContainer">
+        <div class="menu" id="menu">
+            <span class="close-menu" id="closeMenu">✖</span>
+            <ul>
+                <li><a href="#" onclick="showPage('home')">Trang chủ</a></li>
+                <li><a href="#" onclick="showPage('hack')">HACK</a></li>
+                <li><a href="#" onclick="showPage('script')">Script Blox Fruits</a></li>
+                <li><a href="#" onclick="showPage('unknown')">CHƯA BIẾT THÊM GÌ</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content" id="home">
+        <h1>Discord Join</h1>
+        <ul>
+            <li><a href="https://discord.gg/kDRaYFyh" target="_blank" style="color: blue;">Tham gia máy chủ Discord</a></li>
+        </ul>
+        <p>Các phần hack, script sẽ nằm trong các mục khác, hãy sử dụng menu để truy cập.</p>
+    </div>
+
+    <div class="content" id="hack">
+        <h1>HACK</h1>
+        <p>CLIENT HACK QUỐC TẾ VÀ VNG:</p>
+
+        <h2>QUỐC TẾ</h2>
+        <ul>
+            <li>
+                <strong>Trigon</strong><br>
+                <a href="https://www.mediafire.com/file/fzg5y2fmnvake2y/Trigon_v2.662.apk/file" target="_blank">Tải xuống</a>
+            </li>
+            <li>
+                <strong>Arceus X Neo</strong><br>
+                <a href="https://www.mediafire.com/file/hpbgfpgbpdf6toj/Arceus_X_NEO_Qu%25E1%25BB%2591c_T%25E1%25BA%25BF_1.5.8.apk/file" target="_blank">Tải xuống</a>
+            </li>
+        </ul>
+    </div>
+
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleThemeButton = document.getElementById("toggleTheme");
+            const menuButton = document.getElementById("menuButton");
+            const closeMenu = document.getElementById("closeMenu");
+            const menuContainer = document.getElementById("menuContainer");
+            const menu = document.getElementById("menu");
+
+            // Kiểm tra dark mode từ localStorage
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+                toggleThemeButton.textContent = "🌙";
+            }
+
+            toggleThemeButton.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+                toggleThemeButton.textContent = document.body.classList.contains("dark-mode") ? "🌙" : "🌞";
+            });
+
+            menuButton.addEventListener("click", () => {
+                menuContainer.style.display = "flex";
+                setTimeout(() => menu.classList.add("show"), 10);
+            });
+
+            function closeMenuFunc() {
+                menu.classList.remove("show");
+                setTimeout(() => menuContainer.style.display = "none", 300);
+            }
+
+            closeMenu.addEventListener("click", closeMenuFunc);
+            menuContainer.addEventListener("click", (e) => { if (e.target === menuContainer) closeMenuFunc(); });
+
+            // Hàm chuyển trang
+            window.showPage = function(page) {
+                document.querySelectorAll(".content").forEach(el => el.style.display = "none");
+                document.getElementById(page).style.display = "block";
+            };
+        });
+    </script>
+</body>
+</html>
